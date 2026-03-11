@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { testimonials } from '@/lib/data'
@@ -14,78 +14,30 @@ const accentMap = {
 
 export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const total = testimonials.length
-
-  const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index)
-    if (trackRef.current) {
-      const isMobile = window.innerWidth < 768
-      const isTablet = window.innerWidth < 1024
-      const offset = isMobile ? 100 : isTablet ? 50 : 33.333
-      gsap.to(trackRef.current, {
-        xPercent: -index * offset,
-        duration: 0.6,
-        ease: 'power3.inOut',
-      })
-    }
-  }, [])
-
-  const startAutoplay = useCallback(() => {
-    if (autoplayRef.current) clearInterval(autoplayRef.current)
-    autoplayRef.current = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % total
-        if (trackRef.current) {
-          const isMobile = window.innerWidth < 768
-          const isTablet = window.innerWidth < 1024
-          const offset = isMobile ? 100 : isTablet ? 50 : 33.333
-          gsap.to(trackRef.current, {
-            xPercent: -next * offset,
-            duration: 0.6,
-            ease: 'power3.inOut',
-          })
-        }
-        return next
-      })
-    }, 5000)
-  }, [total])
+  const gridRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    startAutoplay()
-
     const ctx = gsap.context(() => {
-      if (trackRef.current) {
-        const cards = trackRef.current.querySelectorAll('.testimonial-card-item')
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll('.testimonial-card-item')
         gsap.fromTo(
           cards,
-          { opacity: 0, y: 40, scale: 0.95 },
+          { opacity: 0, y: 50, scale: 0.94 },
           {
-            scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true },
+            scrollTrigger: { trigger: gridRef.current, start: 'top 80%', once: true },
             opacity: 1,
             y: 0,
             scale: 1,
             duration: 0.7,
-            stagger: 0.12,
+            stagger: 0.15,
             ease: 'power3.out',
           }
         )
       }
     }, sectionRef)
 
-    return () => {
-      if (autoplayRef.current) clearInterval(autoplayRef.current)
-      ctx.revert()
-    }
-  }, [startAutoplay])
-
-  const handleDotClick = (i: number) => {
-    goToSlide(i)
-    if (autoplayRef.current) clearInterval(autoplayRef.current)
-    startAutoplay()
-  }
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section
@@ -96,7 +48,7 @@ export default function Testimonials() {
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <div className="section-label-row justify-center">
             <span className="section-label-line" />
             <span className="section-label-text">Testimonials</span>
@@ -107,89 +59,79 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        {/* Carousel */}
-        <div className="relative overflow-hidden">
-          <div
-            ref={trackRef}
-            className="flex gap-6"
-            style={{ willChange: 'transform' }}
-          >
-            {testimonials.map((t, i) => {
-              const accent = accentMap[t.accent]
-              return (
+        {/* Cards Grid */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
+        >
+          {testimonials.map((t, i) => {
+            const accent = accentMap[t.accent]
+            return (
+              <div
+                key={i}
+                className="testimonial-card-item relative p-6 sm:p-8 rounded-2xl overflow-hidden group transition-all duration-300"
+                style={{
+                  background: 'var(--glass-bg)',
+                  border: `1px solid ${accent.border}`,
+                  backdropFilter: 'blur(var(--glass-blur))',
+                  WebkitBackdropFilter: 'blur(var(--glass-blur))',
+                  opacity: 0,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-6px)'
+                  e.currentTarget.style.boxShadow = `0 20px 50px rgba(0,0,0,0.3), 0 0 30px ${accent.bg}`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
+              >
+                {/* Top accent line */}
                 <div
-                  key={i}
-                  className="testimonial-card-item flex-shrink-0 p-5 sm:p-8 rounded-xl sm:rounded-2xl"
+                  className="absolute top-0 left-0 right-0 h-[2px]"
+                  style={{ background: accent.gradient }}
+                />
+
+                {/* Large quote mark */}
+                <div
+                  className="text-5xl sm:text-6xl font-black leading-none mb-3 sm:mb-4 select-none"
+                  style={{ color: accent.color, opacity: 0.25, fontFamily: 'serif' }}
+                >
+                  &ldquo;
+                </div>
+
+                {/* Quote text */}
+                <p
+                  className="text-[13px] sm:text-sm leading-relaxed mb-6 sm:mb-8 italic pl-4 sm:pl-5"
                   style={{
-                    minWidth: 'min(calc(33.333% - 16px), calc(100vw - 48px))',
-                    maxWidth: 'min(calc(33.333% - 16px), calc(100vw - 48px))',
-                    background: 'var(--glass-bg)',
-                    border: '1px solid var(--glass-border)',
-                    backdropFilter: 'blur(var(--glass-blur))',
-                    WebkitBackdropFilter: 'blur(var(--glass-blur))',
-                    opacity: 0,
+                    color: 'var(--text-secondary)',
+                    borderLeft: `2px solid ${accent.color}`,
                   }}
                 >
-                  {/* Large quote mark */}
+                  {t.text}
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 mt-auto">
                   <div
-                    className="text-6xl font-black leading-none mb-4"
-                    style={{ color: accent.color, opacity: 0.3, fontFamily: 'serif' }}
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-white shrink-0"
+                    style={{ background: accent.gradient }}
                   >
-                    "
+                    {t.avatar}
                   </div>
-
-                  {/* Quote text */}
-                  <p
-                    className="text-sm leading-relaxed mb-6 italic pl-5"
-                    style={{
-                      color: 'var(--text-secondary)',
-                      borderLeft: `2px solid ${accent.color}`,
-                      overflowWrap: 'break-word',
-                      wordBreak: 'break-word',
-                    }}
-                  >
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-3">
+                  <div className="min-w-0">
+                    <div className="font-bold text-sm sm:text-[15px] truncate">{t.name}</div>
                     <div
-                      className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
-                      style={{ background: accent.gradient }}
+                      className="text-[11px] sm:text-xs truncate"
+                      style={{ color: 'var(--text-muted)' }}
                     >
-                      {t.avatar}
-                    </div>
-                    <div>
-                      <div className="font-bold text-[15px]">{t.name}</div>
-                      <div
-                        className="text-xs"
-                        style={{ color: 'var(--text-muted)' }}
-                      >
-                        {t.role}
-                      </div>
+                      {t.role}
                     </div>
                   </div>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handleDotClick(i)}
-              className="testimonial-dot h-2 rounded-full transition-all duration-300"
-              style={{
-                width: currentSlide === i ? '24px' : '8px',
-                background: currentSlide === i ? 'var(--accent-blue)' : 'var(--border-hover)',
-                borderRadius: currentSlide === i ? '4px' : '50%',
-              }}
-              aria-label={`Go to testimonial ${i + 1}`}
-            />
-          ))}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
