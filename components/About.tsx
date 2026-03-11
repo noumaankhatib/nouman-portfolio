@@ -82,8 +82,8 @@ export default function About() {
       className="section"
       style={{ background: 'var(--bg-secondary)' }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
           {/* Left Column */}
           <div>
             {/* Section Label */}
@@ -95,27 +95,26 @@ export default function About() {
             {/* Quote */}
             <blockquote
               ref={quoteRef}
-              className="text-3xl font-extrabold leading-tight mb-8 pl-6"
+              className="text-xl sm:text-2xl md:text-3xl font-extrabold leading-tight mb-8 pl-4 sm:pl-6"
               style={{
                 borderLeft: '3px solid var(--accent-blue)',
                 letterSpacing: '-0.5px',
                 opacity: 0,
               }}
             >
-              "I don't write code. I{' '}
-              <span className="gradient-text">architect systems</span> that outlive hype cycles."
+              "Passionate about building{' '}
+              <span className="gradient-text">enterprise-grade systems</span> that scale."
             </blockquote>
 
             {/* Orbit Animation */}
             <div className="flex justify-center mb-8">
               <div
                 ref={orbContainerRef}
-                className="relative"
-                style={{ width: '280px', height: '280px' }}
+                className="relative w-[220px] h-[220px] sm:w-[280px] sm:h-[280px]"
               >
                 {/* Center NK */}
                 <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full flex items-center justify-center text-3xl font-black text-white z-[2]"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-xl sm:text-3xl font-black text-white z-[2]"
                   style={{
                     background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
                     boxShadow: 'var(--glow-blue)',
@@ -128,8 +127,8 @@ export default function About() {
                 <div
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
                   style={{
-                    width: '240px',
-                    height: '240px',
+                    width: '85%',
+                    height: '85%',
                     border: '1px dashed rgba(59,130,246,0.2)',
                   }}
                 />
@@ -159,14 +158,14 @@ export default function About() {
               {stats.map(({ value, label }) => (
                 <div
                   key={label}
-                  className="stat-item p-4 rounded-xl text-center"
+                  className="stat-item p-3 sm:p-4 rounded-xl text-center"
                   style={{
                     background: 'var(--bg-card)',
                     border: '1px solid var(--border-subtle)',
                   }}
                 >
                   <div
-                    className="text-2xl font-black font-mono mb-1 gradient-text"
+                    className="text-xl sm:text-2xl font-black font-mono mb-1 gradient-text"
                   >
                     {value}
                   </div>
@@ -187,31 +186,31 @@ export default function About() {
               className="section-heading mb-6"
               style={{ opacity: 0 }}
             >
-              The Engineer Behind{' '}
-              <span className="gradient-text">Jio&apos;s Scale.</span>
+              The Developer Behind{' '}
+              <span className="gradient-text">the Code.</span>
             </h2>
             <p
               className="text-base leading-relaxed mb-5"
               style={{ color: 'var(--text-secondary)', opacity: 0 }}
             >
-              I&apos;m a Senior Full Stack Developer with 8+ years of experience building large-scale distributed
-              systems at Reliance Jio — India&apos;s largest telecom platform serving 500M+ subscribers.
+              A Senior Full-Stack Developer with 8+ years of experience specializing in Node.js
+              and modern web technologies. Proven track record in designing and delivering highly scalable,
+              distributed systems that handle 100M+ daily requests.
             </p>
             <p
               className="text-base leading-relaxed mb-5"
               style={{ color: 'var(--text-secondary)', opacity: 0 }}
             >
-              I specialize in designing high-throughput backend architectures, identity platforms, and real-time
-              data pipelines that handle 100M+ daily requests with 99.9% uptime. My work spans the full stack:
-              from Node.js and Java microservices to React dashboards and WebSocket-powered monitoring tools.
+              Skilled in debugging, optimizing, and maintaining large-scale applications with a focus on
+              performance, reliability, and system efficiency. Proficient in leveraging the right tools
+              and monitoring techniques to ensure seamless system operations.
             </p>
             <p
               className="text-base leading-relaxed"
               style={{ color: 'var(--text-secondary)', opacity: 0 }}
             >
-              I&apos;ve led critical projects including universal identity federation, payment platforms processing
-              1M+ transactions daily, and massive data migrations of 2B+ records. I thrive in complex,
-              high-stakes environments where system reliability isn&apos;t optional — it&apos;s existential.
+              Recognized for a big-picture mindset, rapid learning ability, and a pragmatic approach
+              to solving complex technical challenges with simplicity and precision.
             </p>
           </div>
         </div>

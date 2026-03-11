@@ -82,7 +82,7 @@ export default function Impact() {
         }}
       />
 
-      <div className="max-w-[1200px] mx-auto px-6 relative z-[1]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-[1]">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="section-label-row justify-center">
@@ -98,14 +98,14 @@ export default function Impact() {
         {/* Metrics Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-10"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-10"
         >
           {metrics.map((metric) => {
             const accent = accentColorMap[metric.accent]
             return (
               <div
                 key={metric.label}
-                className="impact-item text-center py-10 px-5 rounded-2xl relative overflow-hidden"
+                className="impact-item text-center py-6 px-3 sm:py-10 sm:px-5 rounded-xl sm:rounded-2xl relative overflow-hidden"
                 style={{
                   background: 'var(--bg-card)',
                   border: `1px solid ${accent.border}`,

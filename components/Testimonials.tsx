@@ -94,12 +94,13 @@ export default function Testimonials() {
       className="section"
       style={{ background: 'var(--bg-secondary)' }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="mb-16">
-          <div className="section-label-row">
+        <div className="text-center mb-16">
+          <div className="section-label-row justify-center">
             <span className="section-label-line" />
             <span className="section-label-text">Testimonials</span>
+            <span className="section-label-line" />
           </div>
           <h2 className="section-heading">
             What They <span className="gradient-text">Say</span>
@@ -118,10 +119,10 @@ export default function Testimonials() {
               return (
                 <div
                   key={i}
-                  className="testimonial-card-item flex-shrink-0 p-8 rounded-2xl"
+                  className="testimonial-card-item flex-shrink-0 p-5 sm:p-8 rounded-xl sm:rounded-2xl"
                   style={{
-                    minWidth: 'min(calc(33.333% - 16px), calc(100vw - 64px))',
-                    maxWidth: 'min(calc(33.333% - 16px), calc(100vw - 64px))',
+                    minWidth: 'min(calc(33.333% - 16px), calc(100vw - 48px))',
+                    maxWidth: 'min(calc(33.333% - 16px), calc(100vw - 48px))',
                     background: 'var(--glass-bg)',
                     border: '1px solid var(--glass-border)',
                     backdropFilter: 'blur(var(--glass-blur))',

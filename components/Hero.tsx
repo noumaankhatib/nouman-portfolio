@@ -36,14 +36,26 @@ export default function Hero() {
       const scrollHint = scrollHintRef.current
       if (!nameEl) return
 
-      // ── Split name into individual chars ──
-      const fullName = 'NOUMAN KHATIB'
+      // ── Split name into individual chars with word-aware grouping ──
+      const nameParts = ['NOUMAN', 'KHATIB']
       nameEl.innerHTML = ''
-      fullName.split('').forEach((ch) => {
-        const span = document.createElement('span')
-        span.className = ch === ' ' ? 'hero-name-char char-space' : 'hero-name-char'
-        if (ch !== ' ') span.textContent = ch
-        nameEl.appendChild(span)
+      nameParts.forEach((word, wIdx) => {
+        const wordWrap = document.createElement('span')
+        wordWrap.className = 'hero-name-word'
+        wordWrap.style.display = 'inline-block'
+        wordWrap.style.whiteSpace = 'nowrap'
+        word.split('').forEach((ch) => {
+          const span = document.createElement('span')
+          span.className = 'hero-name-char'
+          span.textContent = ch
+          wordWrap.appendChild(span)
+        })
+        nameEl.appendChild(wordWrap)
+        if (wIdx < nameParts.length - 1) {
+          const space = document.createElement('span')
+          space.className = 'hero-name-char char-space'
+          nameEl.appendChild(space)
+        }
       })
       const chars = nameEl.querySelectorAll('.hero-name-char:not(.char-space)')
 
@@ -183,14 +195,14 @@ export default function Hero() {
 
       {/* ── Content — centred ── */}
       <div
-        className="relative z-[2] w-full max-w-[960px] mx-auto px-6 text-center"
-        style={{ paddingTop: 'calc(var(--nav-height) + 2rem)', paddingBottom: '6rem' }}
+        className="relative z-[2] w-full max-w-[960px] mx-auto px-4 sm:px-6 text-center"
+        style={{ paddingTop: 'calc(var(--nav-height) + 1.5rem)', paddingBottom: '4rem' }}
       >
 
         {/* Availability badge */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 text-sm font-semibold font-mono tracking-wide"
+          className="inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full mb-6 sm:mb-8 text-xs sm:text-sm font-semibold font-mono tracking-wide"
           style={{
             background: 'rgba(0,255,136,0.07)',
             border: '1px solid rgba(0,255,136,0.25)',
@@ -201,17 +213,13 @@ export default function Hero() {
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ background: 'var(--accent-green)', animation: 'pulse-glow 2s ease-in-out infinite' }}
           />
-          🟢 Available for Projects
+          Available for Projects
         </div>
 
         {/* Name — split-char reveal */}
         <h1
           ref={nameRef}
-          className="font-black leading-none mb-4 overflow-hidden"
-          style={{
-            fontSize: 'clamp(52px, 9vw, 100px)',
-            letterSpacing: '-0.04em',
-          }}
+          className="hero-name font-black leading-none mb-4"
           aria-label="Nouman Khatib"
         >
           NOUMAN KHATIB
@@ -220,30 +228,20 @@ export default function Hero() {
         {/* Title line */}
         <p
           ref={titleRef}
-          className="font-mono mb-6 tracking-wider"
-          style={{
-            fontSize: 'clamp(13px, 1.8vw, 16px)',
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.18em',
-          }}
+          className="hero-title-line font-mono mb-6"
         >
-          <span style={{ color: 'var(--accent-blue)', fontWeight: 700 }}>Senior Full Stack Developer</span>
-          &nbsp;·&nbsp;8+ Years&nbsp;·&nbsp;Remote Worldwide
+          <span className="hero-title-role">Senior Full Stack Developer</span>
+          <span className="hero-title-sep hidden sm:inline">&nbsp;·&nbsp;</span>
+          <br className="sm:hidden" />
+          <span className="hero-title-meta">8+ Years · Node.js Expert · Remote Worldwide</span>
         </p>
 
         {/* Typewriter tagline */}
         <div
           ref={taglineRef}
-          className="mx-auto mb-6"
+          className="hero-tagline mx-auto mb-6"
           style={{
-            fontSize: 'clamp(20px, 3.5vw, 34px)',
-            fontWeight: 800,
-            lineHeight: 1.25,
-            letterSpacing: '-0.02em',
-            maxWidth: '760px',
             opacity: 0,
-            minHeight: '2.6em',
           }}
         >
           <span className="typed-text" />
@@ -253,24 +251,24 @@ export default function Hero() {
         {/* Sub description */}
         <p
           ref={subRef}
-          className="mx-auto mb-10 text-[15px] leading-relaxed"
+          className="mx-auto mb-8 sm:mb-10 text-[13px] sm:text-[15px] leading-relaxed px-2 sm:px-0"
           style={{
             color: 'var(--text-muted)',
             maxWidth: '540px',
           }}
         >
-          8+ years engineering systems that process billions of requests — identity platforms,
-          payment backends, and real-time infrastructure that millions depend on every day.
+          Expert in Node.js, data engineering, and enterprise identity solutions.
+          Proven track record in designing highly scalable systems with 99.9% uptime.
         </p>
 
         {/* CTA buttons */}
         <div
           ref={ctasRef}
-          className="flex items-center justify-center gap-4 mb-16 flex-wrap"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-16 px-2 sm:px-0"
         >
           <button
             onClick={() => scrollTo('contact')}
-            className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-[15px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105"
+            className="group inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-[14px] sm:text-[15px] font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105"
             style={{
               background: 'linear-gradient(135deg, var(--accent-blue), #6366f1)',
               boxShadow: '0 4px 24px rgba(59,130,246,0.4), 0 1px 0 rgba(255,255,255,0.15) inset',
@@ -284,7 +282,7 @@ export default function Hero() {
           </button>
           <button
             onClick={() => scrollTo('projects')}
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-[15px] font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-white/5"
+            className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-[14px] sm:text-[15px] font-semibold transition-all duration-300 hover:-translate-y-1 hover:bg-white/5"
             style={{
               background: 'transparent',
               color: 'var(--text-primary)',
@@ -304,7 +302,7 @@ export default function Hero() {
         {/* ── Metrics Row ── */}
         <div
           ref={metricsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden"
+          className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl sm:rounded-2xl overflow-hidden"
           style={{
             background: 'var(--border-subtle)',
             border: '1px solid var(--border-subtle)',
@@ -320,7 +318,7 @@ export default function Hero() {
             return (
               <div
                 key={metric.label}
-                className="flex flex-col items-center justify-center py-7 px-4 relative group transition-colors duration-300"
+                className="flex flex-col items-center justify-center py-5 sm:py-7 px-3 sm:px-4 relative group transition-colors duration-300"
                 style={{ background: 'var(--bg-secondary)' }}
                 onMouseEnter={e => (e.currentTarget.style.background = 'var(--bg-card)')}
                 onMouseLeave={e => (e.currentTarget.style.background = 'var(--bg-secondary)')}

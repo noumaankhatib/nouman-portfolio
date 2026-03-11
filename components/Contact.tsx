@@ -64,7 +64,7 @@ export default function Contact() {
         }}
       />
 
-      <div className="max-w-[1200px] mx-auto px-6 relative z-[1]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-[1]">
         <div
           ref={innerRef}
           className="text-center max-w-[700px] mx-auto"
@@ -103,8 +103,8 @@ export default function Contact() {
             className="text-lg leading-relaxed mb-12"
             style={{ color: 'var(--text-muted)' }}
           >
-            Got a system that needs to scale? An identity problem to solve? A migration that
-            can&apos;t fail? I&apos;m available for freelance engineering projects worldwide.
+            Have a project in mind? Whether you need a complete web application, API development,
+            or consulting on your existing project, I&apos;m here to help you succeed.
           </p>
 
           {/* Email Button */}
@@ -125,7 +125,7 @@ export default function Contact() {
               href="https://github.com/noumaankhatib"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link magnetic-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:-translate-y-0.5"
+              className="social-link magnetic-btn inline-flex items-center gap-2 sm:gap-2.5 px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl font-semibold text-[13px] sm:text-[15px] transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
@@ -149,7 +149,7 @@ export default function Contact() {
               href="https://linkedin.com/in/noumaankhatib"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link magnetic-btn inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:-translate-y-0.5"
+              className="social-link magnetic-btn inline-flex items-center gap-2 sm:gap-2.5 px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl font-semibold text-[13px] sm:text-[15px] transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',

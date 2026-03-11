@@ -80,8 +80,8 @@ export default function Timeline() {
       className="section"
       style={{ background: 'var(--bg-primary)' }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid md:grid-cols-[1fr_2fr] gap-16 items-start">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-16 items-start">
           {/* Left: Intro */}
           <div className="timeline-left md:sticky md:top-24" style={{ opacity: 0 }}>
             <div className="section-label-row">
@@ -89,15 +89,15 @@ export default function Timeline() {
               <span className="section-label-text">Journey</span>
             </div>
             <h2 className="section-heading mb-6">
-              8+ Years at <span className="gradient-text">Jio</span>
+              Work <span className="gradient-text">Experience</span>
             </h2>
             <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>
-              From foundational microservices to architecting systems that serve half a billion users.
+              8+ years of building enterprise-scale systems at Reliance Jio.
             </p>
 
             {/* Company Badge */}
             <div
-              className="p-6 rounded-2xl"
+              className="p-4 sm:p-6 rounded-xl sm:rounded-2xl"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',

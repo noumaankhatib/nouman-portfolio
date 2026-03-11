@@ -74,18 +74,19 @@ export default function Projects() {
       className="section"
       style={{ background: 'var(--bg-primary)' }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="mb-16">
-          <div className="section-label-row">
+        <div className="text-center mb-16">
+          <div className="section-label-row justify-center">
             <span className="section-label-line" />
             <span className="section-label-text">Work</span>
+            <span className="section-label-line" />
           </div>
           <h2 className="section-heading mb-4">
-            Featured <span className="gradient-text">Projects</span>
+            Enterprise <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-lg max-w-xl" style={{ color: 'var(--text-muted)' }}>
-            Production systems powering real-world scale — no prototypes, no toy projects.
+          <p className="text-lg max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+            Building identity, authentication, and data platforms that power millions of users daily across Jio&apos;s ecosystem.
           </p>
         </div>
 
@@ -104,7 +105,7 @@ export default function Projects() {
               <CardWrapper
                 key={project.id}
                 {...(wrapperProps as any)}
-                className="project-card project-card-item relative rounded-2xl p-8 overflow-hidden transition-all duration-300 block"
+                className="project-card project-card-item relative rounded-xl sm:rounded-2xl p-5 sm:p-8 transition-all duration-300 block"
                 style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-subtle)',
@@ -182,6 +183,22 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
+
+                {/* Visit Website indicator */}
+                {project.url && (
+                  <div
+                    className="flex items-center gap-2 mt-5 pt-4 font-semibold text-sm transition-all duration-300 group-hover:gap-3"
+                    style={{
+                      borderTop: `1px solid ${accent.border}`,
+                      color: accent.color,
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M6 3h7v7M13 3L6 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    Visit Live Website
+                  </div>
+                )}
               </CardWrapper>
             )
           })}

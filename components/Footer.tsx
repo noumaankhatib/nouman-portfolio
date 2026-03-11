@@ -14,8 +14,8 @@ export default function Footer() {
         background: 'var(--bg-primary)',
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
           {/* Brand */}
           <div>
             <span
@@ -33,12 +33,12 @@ export default function Footer() {
               className="text-xs font-mono mt-0.5"
               style={{ color: 'var(--text-dim)' }}
             >
-              Senior Full Stack Engineer
+              Full-Stack Developer
             </p>
           </div>
 
           {/* Nav links */}
-          <nav className="flex items-center gap-6">
+          <nav className="flex items-center flex-wrap justify-center gap-4 sm:gap-6">
             {NAV_LINKS.map(({ label, href }) => (
               <a
                 key={label}

@@ -102,7 +102,7 @@ export default function Navbar() {
 
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-center px-10 transition-all duration-300 ${scrolled ? 'navbar-scrolled' : ''}`}
+        className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-center px-4 sm:px-10 transition-all duration-300 ${scrolled ? 'navbar-scrolled' : ''}`}
         style={{ height: 'var(--nav-height)' }}
       >
         <div className="w-full max-w-[1200px] flex items-center justify-between">

@@ -10,6 +10,8 @@ const accentMap = {
   blue: { color: 'var(--accent-blue)', glow: 'var(--glow-blue)', bg: 'rgba(59,130,246,0.1)', border: 'rgba(59,130,246,0.15)' },
   purple: { color: 'var(--accent-purple)', glow: 'var(--glow-purple)', bg: 'rgba(168,85,247,0.1)', border: 'rgba(168,85,247,0.15)' },
   green: { color: 'var(--accent-green)', glow: 'var(--glow-green)', bg: 'rgba(0,255,136,0.1)', border: 'rgba(0,255,136,0.15)' },
+  cyan: { color: 'var(--accent-cyan)', glow: 'var(--glow-cyan)', bg: 'rgba(6,182,212,0.1)', border: 'rgba(6,182,212,0.15)' },
+  orange: { color: 'var(--accent-orange)', glow: 'var(--glow-orange)', bg: 'rgba(249,115,22,0.1)', border: 'rgba(249,115,22,0.15)' },
 }
 
 export default function Services() {
@@ -46,18 +48,19 @@ export default function Services() {
       className="section"
       style={{ background: 'var(--bg-primary)' }}
     >
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="mb-16">
-          <div className="section-label-row">
+        <div className="text-center mb-16">
+          <div className="section-label-row justify-center">
             <span className="section-label-line" />
             <span className="section-label-text">What I Do</span>
+            <span className="section-label-line" />
           </div>
           <h2 className="section-heading mb-4">
             Core <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-lg max-w-xl" style={{ color: 'var(--text-muted)' }}>
-            Specialized engineering for companies that can&apos;t afford to fail at scale.
+          <p className="text-lg max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+            Enterprise-grade solutions from scalable backends to complex data migrations.
           </p>
         </div>
 
@@ -71,7 +74,7 @@ export default function Services() {
             return (
               <div
                 key={service.title}
-                className="service-card relative p-10 rounded-2xl overflow-hidden transition-all duration-300 group"
+                className="service-card relative p-6 sm:p-10 rounded-2xl overflow-hidden transition-all duration-300 group"
                 style={{
                   background: 'var(--glass-bg)',
                   border: '1px solid var(--glass-border)',
