@@ -93,7 +93,7 @@ export default function Projects() {
         {/* Grid */}
         <div
           ref={gridRef}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
         >
           {projects.map((project) => {
             const accent = accentMap[project.accent]
@@ -105,7 +105,7 @@ export default function Projects() {
               <CardWrapper
                 key={project.id}
                 {...(wrapperProps as any)}
-                className="project-card project-card-item relative rounded-xl sm:rounded-2xl p-5 sm:p-8 transition-all duration-300 block"
+                className="project-card project-card-item relative rounded-xl sm:rounded-2xl p-5 sm:p-8 transition-all duration-300 flex flex-col"
                 style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-subtle)',
@@ -159,15 +159,15 @@ export default function Projects() {
                   📊 {project.impact}
                 </div>
 
-                {/* Description */}
+                {/* Description — grows to fill remaining space */}
                 <p
-                  className="text-sm leading-relaxed mb-5"
+                  className="text-sm leading-relaxed mb-5 flex-1"
                   style={{ color: 'var(--text-muted)' }}
                 >
                   {project.description}
                 </p>
 
-                {/* Stack */}
+                {/* Stack — always pinned to bottom */}
                 <div className="flex flex-wrap gap-1.5">
                   {project.stack.map((tech) => (
                     <span

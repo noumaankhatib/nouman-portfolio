@@ -1,5 +1,5 @@
 import Loader from '@/components/Loader'
-import Cursor from '@/components/Cursor'
+// import Cursor from '@/components/Cursor'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Loader />
-      <Cursor />
+      {/* <Cursor /> */}
       <Navbar />
       <main>
         <Hero />

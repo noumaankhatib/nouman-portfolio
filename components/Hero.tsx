@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import gsap from 'gsap'
-import { metrics } from '@/lib/data'
+
 
 const ParticleScene = dynamic(() => import('./ParticleScene'), { ssr: false })
 
@@ -14,7 +14,6 @@ export default function Hero() {
   const taglineRef     = useRef<HTMLDivElement>(null)
   const subRef         = useRef<HTMLParagraphElement>(null)
   const ctasRef        = useRef<HTMLDivElement>(null)
-  const metricsRef     = useRef<HTMLDivElement>(null)
   const scrollHintRef  = useRef<HTMLDivElement>(null)
   // Prevent React StrictMode double-execution
   const animationDone  = useRef(false)
@@ -32,7 +31,6 @@ export default function Hero() {
       const taglineEl = taglineRef.current
       const sub       = subRef.current
       const ctas      = ctasRef.current
-      const metricsEl = metricsRef.current
       const scrollHint = scrollHintRef.current
       if (!nameEl) return
 
@@ -122,33 +120,10 @@ export default function Hero() {
         tl.to(ctas, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 1.65)
       }
 
-      // Metrics row
-      if (metricsEl) {
-        gsap.set(metricsEl, { opacity: 0, y: 20 })
-        tl.to(metricsEl, { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' }, 1.8)
-
-        // Roll-up counters
-        metrics.forEach((metric, i) => {
-          const id = `hero-metric-${metric.label.replace(/\s+/g, '-')}`
-          const el = document.getElementById(id)
-          if (!el) return
-          const isDecimal = metric.value % 1 !== 0
-          const obj = { val: 0 }
-          tl.to(obj, {
-            val: metric.value,
-            duration: 2.2,
-            ease: 'power2.out',
-            onUpdate: () => {
-              el.textContent = (isDecimal ? obj.val.toFixed(1) : Math.floor(obj.val)) + metric.suffix
-            },
-          }, 1.95 + i * 0.08)
-        })
-      }
-
       // Scroll hint
       if (scrollHint) {
         gsap.set(scrollHint, { opacity: 0 })
-        tl.to(scrollHint, { opacity: 1, duration: 0.6 }, 2.6)
+        tl.to(scrollHint, { opacity: 1, duration: 0.6 }, 2.0)
       }
     }
 
@@ -299,59 +274,6 @@ export default function Hero() {
           </button>
         </div>
 
-        {/* ── Metrics Row ── */}
-        <div
-          ref={metricsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl sm:rounded-2xl overflow-hidden"
-          style={{
-            background: 'var(--border-subtle)',
-            border: '1px solid var(--border-subtle)',
-          }}
-        >
-          {metrics.map((metric, i) => {
-            const gradients = [
-              'linear-gradient(135deg, var(--accent-blue), #6366f1)',
-              'linear-gradient(135deg, var(--accent-purple), var(--accent-blue))',
-              'linear-gradient(135deg, var(--accent-green), var(--accent-cyan))',
-              'linear-gradient(135deg, var(--accent-cyan), var(--accent-blue))',
-            ]
-            return (
-              <div
-                key={metric.label}
-                className="flex flex-col items-center justify-center py-5 sm:py-7 px-3 sm:px-4 relative group transition-colors duration-300"
-                style={{ background: 'var(--bg-secondary)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'var(--bg-card)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'var(--bg-secondary)')}
-              >
-                {/* Top accent */}
-                <div
-                  className="absolute top-0 left-8 right-8 h-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: gradients[i] }}
-                />
-                <div
-                  id={`hero-metric-${metric.label.replace(/\s+/g, '-')}`}
-                  className="font-mono font-black leading-none mb-1.5"
-                  style={{
-                    fontSize: 'clamp(24px, 3.5vw, 36px)',
-                    letterSpacing: '-0.04em',
-                    background: gradients[i],
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  0{metric.suffix}
-                </div>
-                <div
-                  className="font-mono font-semibold uppercase tracking-widest text-center"
-                  style={{ fontSize: '10px', color: 'var(--text-muted)' }}
-                >
-                  {metric.label}
-                </div>
-              </div>
-            )
-          })}
-        </div>
       </div>
 
       {/* Scroll hint */}
