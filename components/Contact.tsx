@@ -112,6 +112,7 @@ export default function Contact() {
             <a
               href="mailto:noumaankhatib@gmail.com"
               className="contact-email-btn magnetic-btn"
+              aria-label="Send email to Nouman Khatib"
               data-cursor="Email"
             >
               <span>✉</span>
@@ -125,6 +126,7 @@ export default function Contact() {
               href="https://github.com/noumaankhatib"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit Nouman Khatib's GitHub profile"
               className="social-link magnetic-btn inline-flex items-center gap-2 sm:gap-2.5 px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl font-semibold text-[13px] sm:text-[15px] transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'var(--bg-card)',
@@ -149,6 +151,7 @@ export default function Contact() {
               href="https://linkedin.com/in/noumaankhatib"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit Nouman Khatib's LinkedIn profile"
               className="social-link magnetic-btn inline-flex items-center gap-2 sm:gap-2.5 px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl font-semibold text-[13px] sm:text-[15px] transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 background: 'var(--bg-card)',
@@ -173,9 +176,10 @@ export default function Contact() {
 
           {/* Secondary CTA */}
           <a
-            href="https://calendly.com"
+            href="https://calendly.com/noumaankhatib"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Schedule a call with Nouman Khatib on Calendly"
             className="magnetic-btn inline-flex items-center gap-2 px-8 py-4 rounded-xl text-[15px] font-semibold transition-all duration-300 hover:-translate-y-0.5"
             style={{
               background: 'transparent',

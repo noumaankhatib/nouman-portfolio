@@ -60,11 +60,20 @@ export default function Navbar() {
       if (el) observer.observe(el)
     })
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileOpen) {
+        setMobileOpen(false)
+        document.body.classList.remove('no-scroll')
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('keydown', handleKeyDown)
       observer.disconnect()
     }
-  }, [])
+  }, [mobileOpen])
 
   const scrollTo = (href: string) => {
     const el = document.querySelector(href)

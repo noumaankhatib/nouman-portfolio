@@ -1,3 +1,5 @@
+'use client'
+
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
@@ -6,6 +8,11 @@ const NAV_LINKS = [
 ]
 
 export default function Footer() {
+  const scrollTo = (href: string) => {
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <footer
       className="py-12"
@@ -43,6 +50,7 @@ export default function Footer() {
               <a
                 key={label}
                 href={href}
+                onClick={(e) => { e.preventDefault(); scrollTo(href) }}
                 className="footer-nav-link text-sm font-mono"
               >
                 {label}
